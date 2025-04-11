@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'recipes/base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+    <h2>Search Results for "{{ query }}"</h2>
+    
+    <div class="search-form">
+        <form method="get" action="{% url 'search' %}">
+            <input type="text" name="q" value="{{ query }}" placeholder="Search recipes...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
+    <div class="recipes-list">
+        {% if recipes %}
+            <p>Found {{ recipes|length }} recipe{{ recipes|length|pluralize }} matching your search.</p>
+            
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.name }}</h3>
+                    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+                    <p>Difficulty: {{ recipe.calculate_difficulty }}</p>
+                    {% if recipe.category %}
+                        <p>Category: {{ recipe.category.name }}</p>
+                    {% endif %}
+                    <a href="{% url 'recipe-detail' recipe.id %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No recipes found matching "{{ query }}".</p>
+        {% endif %}
+    </div>
+    
+    <a href="{% url 'recipe-list' %}" class="back-link">Back to All Recipes</a>
+{% endblock %}

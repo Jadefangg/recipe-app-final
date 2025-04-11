@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/base.html' %}
+
+{% block title %}Logout Successful{% endblock %}
+
+{% block content %}
+<div class="success-container">
+    <div class="success-message">
+        <h2>You've successfully logged out</h2>
+        <div class="success-icon">
+            <span>✓</span>
+        </div>
+        <p>Thank you for visiting our Recipe App!</p>
+        
+        <!-- Creative elements -->
+        <div class="quote-box">
+            <blockquote>
+                "Cooking is like love. It should be entered into with abandon or not at all."
+            </blockquote>
+            <cite>— Harriet Van Horne</cite>
+        </div>
+        
+        <div class="random-recipe">
+            <h3>Try this recipe next time!</h3>
+            {% if random_recipe %}
+                <div class="recipe-suggestion">
+                    <h4>{{ random_recipe.name }}</h4>
+                    <p>{{ random_recipe.cooking_time }} minutes to prepare</p>
+                    <a href="{% url 'recipe-detail' random_recipe.id %}" class="recipe-link">Check it out</a>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="action-links">
+            <a href="{% url 'login' %}" class="login-link">Log back in</a>
+            <a href="{% url 'home' %}" class="home-link">Return to homepage</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

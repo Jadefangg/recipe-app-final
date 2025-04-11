@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- analytics.html -->
+{% extends 'recipes/base.html' %}
+
+{% block title %}Recipe Analytics{% endblock %}
+
+{% block content %}
+<div class="analytics-container">
+    <h2>Recipe Analytics</h2>
+    
+    <div class="stats-summary">
+        <div class="stat-box">
+            <h4>Total Recipes</h4>
+            <p class="stat-value">{{ recipe_count }}</p>
+        </div>
+        <div class="stat-box">
+            <h4>Categories</h4>
+            <p class="stat-value">{{ category_count }}</p>
+        </div>
+    </div>
+    
+    <div class="chart-container">
+        <h3>Recipes per Category</h3>
+        <img src="data:image/png;base64,{{ category_chart }}" alt="Recipes per Category" class="chart-img">
+    </div>
+    
+    <div class="chart-container">
+        <h3>Recipe Difficulty Distribution</h3>
+        <img src="data:image/png;base64,{{ difficulty_chart }}" alt="Recipe Difficulty Distribution" class="chart-img">
+    </div>
+    
+    <div class="chart-container">
+        <h3>Recipe Distribution by Cooking Time</h3>
+        <img src="data:image/png;base64,{{ time_chart }}" alt="Recipe Distribution by Cooking Time" class="chart-img">
+    </div>
+</div>
+{% endblock %}

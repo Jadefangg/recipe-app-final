@@ -1,0 +1,29 @@
+
+Does the application have to manage any other information,
+
+apart from books, customers, and sales? Your answer here will tell you which apps you need and,
+correspondingly, which tables you’ll need in your database.
+
+What attributes are needed for each information category? 
+For example, the customers category may need a name and picture for each customer.
+
+How do these attributes (i.e., tables or apps) interact with each other?    
+
+-----------------------------
+
+books: Information about books stocked by the store.
+salespersons: The salespersons in the store. Each salesperson will have their own ID and login details.
+customers: Customers that have registered as part of the loyalty program.
+sales: A collection of sales records (figures, dates, purchasers, etc.).
+
+Books App:
+- [ ] Book model (title, author, price, book_type, description, picture, published_date, etc.)
+- [ ] Genre model (name, description)
+- [ ] Author model (name, biography, photo)
+
+Customers App:
+- [ ] Customer model (name, notes, profile_pic)
+- [ ] CustomerPreference model (favorite genres, etc.)
+
+Sales & salesperson:
+- [ ] Sale model (username, name, bio, pic*) + (book, quantity, price, date)

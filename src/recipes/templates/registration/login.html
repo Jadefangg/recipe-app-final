@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+    
+    {% if form.errors %}
+    <div class="error-message">
+        <p>Your username and password didn't match. Please try again.</p>
+    </div>
+    {% endif %}
+    
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+    
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="id_password">Password:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit" class="login-button">Login</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    
+    <div class="login-options">
+        <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+    </div>
+</div>
+{% endblock %}

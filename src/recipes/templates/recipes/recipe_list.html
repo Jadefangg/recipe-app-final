@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends 'recipes/base.html' %}
+
+{% block title %}All Recipes{% endblock %}
+
+{% block content %}
+    <h2>All Recipes</h2>
+    
+    <div class="filters">
+        <h3>Filter Recipes</h3>
+        <form method="get" action="{% url 'recipe-list' %}">
+            <div class="search-box">
+                <label for="search">Search:</label>
+                <input type="text" id="search" name="q" value="{{ search_query }}">
+            </div>
+            
+            <div class="category-filter">
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:'i' %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit">Apply Filters</button>
+        </form>
+    </div>
+    
+    <div class="recipes-list">
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <!-- {% if recipe.image %}
+                        <div class="recipe-thumbnail">
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}">
+                        </div>
+                    {% endif %} -->
+                    <h3>{{ recipe.name }}</h3>
+                    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+                    <p>Difficulty: {{ recipe.calculate_difficulty }}</p>
+                    {% if recipe.category %}
+                        <p>Category: {{ recipe.category.name }}</p>
+                    {% endif %}
+                    <a href="{% url 'recipe-detail' recipe.id %}">View Recipe</a>
+                </div>
+            {% endfor %}
+            
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}">previous</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+        {% else %}
+            <p>No recipes found matching your criteria.</p>
+        {% endif %}
+    </div>
+    
+ 
+{% endblock %}

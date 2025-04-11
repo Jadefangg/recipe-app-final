@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+{% extends 'recipes/base.html' %}
+
+{% block title %}Recipe App - Home{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Recipe App!</h2>
+    
+    <div class="stats">
+        <h3>App Statistics</h3>
+        <ul>
+            <li>We have <strong>{{ number_of_recipes }}</strong> recipes</li>
+            <li>Across <strong>{{ number_of_categories }}</strong> categories</li>
+            <li>Using <strong>{{ number_of_ingredients }}</strong> unique ingredients</li>
+        </ul>
+    </div>
+    
+    <div class="latest-recipes">
+        <h3>Latest Recipes</h3>
+        {% if latest_recipes %}
+            {% for recipe in latest_recipes %}
+                <div class="recipe-card">
+                    <h4>{{ recipe.name }}</h4>
+                    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+                    <p>Difficulty: {{ recipe.calculate_difficulty }}</p>
+                    <a href="{% url 'recipe-detail' recipe.id %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No recipes available yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,213 @@
+/*static/recipes/css/styles.css */
+.login-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: #d32f2f;
+    background-color: #fdecea;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.login-options {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* logout page */
+
+.success-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.success-message h2 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.success-icon span {
+    color: white;
+    font-size: 40px;
+}
+
+.quote-box {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f0f8ff;
+    border-left: 4px solid #4CAF50;
+    font-style: italic;
+}
+
+.random-recipe {
+    margin: 30px 0;
+    padding: 15px;
+    background-color: #fffaf0;
+    border-radius: 5px;
+}
+
+.recipe-suggestion {
+    padding: 10px;
+    border: 1px dashed #ddd;
+    margin-top: 10px;
+}
+
+.action-links {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.login-link, .home-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.home-link {
+    background-color: #2196F3;
+}
+
+.login-link:hover {
+    background-color: #45a049;
+}
+
+.home-link:hover {
+    background-color: #0b7dda;
+}
+
+/* Add to your CSS */
+.search-container {
+    margin: 20px 0;
+}
+
+.search-form {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.search-button, .reset-button {
+    padding: 8px 16px;
+    margin-right: 10px;
+}
+
+.results-table {
+    margin: 20px 0;
+}
+
+.no-results {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.analytics-container {
+    margin: 20px 0;
+}
+
+.stats-summary {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.chart-container {
+    margin: 30px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.chart-img {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+}

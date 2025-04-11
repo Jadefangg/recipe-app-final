@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ difficulty }} Recipes{% endblock %}
+
+{% block content %}
+    <h2>{{ difficulty }} Difficulty Recipes</h2>
+    
+    <div class="difficulty-info">
+        <p>These recipes have been classified as <strong>{{ difficulty }}</strong> based on cooking time and number of ingredients.</p>
+        
+        <ul class="difficulty-nav">
+            <li><a href="{% url 'difficulty' 'easy' %}">Easy</a></li>
+            <li><a href="{% url 'difficulty' 'medium' %}">Medium</a></li>
+            <li><a href="{% url 'difficulty' 'intermediate' %}">Intermediate</a></li>
+            <li><a href="{% url 'difficulty' 'hard' %}">Hard</a></li>
+        </ul>
+    </div>
+    
+    <div class="recipes-list">
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.name }}</h3>
+                    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+                    <p>Ingredients: {{ recipe.get_ingredients_list|length }}</p>
+                    {% if recipe.category %}
+                        <p>Category: {{ recipe.category.name }}</p>
+                    {% endif %}
+                    <a href="{% url 'recipe-detail' recipe.id %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No recipes found with {{ difficulty }} difficulty.</p>
+        {% endif %}
+    </div>
+    
+    <a href="{% url 'recipe-list' %}" class="back-link">Back to All Recipes</a>
+{% endblock %}

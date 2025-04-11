@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'recipes/base.html' %}
+
+{% block title %}Recipes with {{ ingredient.name }}{% endblock %}
+
+{% block content %}
+    <h2>Recipes with {{ ingredient.name }}</h2>
+    
+    {% if ingredient.notes %}
+        <div class="ingredient-notes">
+            <h3>Notes</h3>
+            <p>{{ ingredient.notes }}</p>
+        </div>
+    {% endif %}
+    
+    <div class="recipes-list">
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.name }}</h3>
+                    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+                    <p>Difficulty: {{ recipe.calculate_difficulty }}</p>
+                    {% if recipe.category %}
+                        <p>Category: {{ recipe.category.name }}</p>
+                    {% endif %}
+                    <a href="{% url 'recipe-detail' recipe.id %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No recipes found using this ingredient.</p>
+        {% endif %}
+    </div>
+    
+    <a href="{% url 'recipe-list' %}" class="back-link">Back to All Recipes</a>
+{% endblock %}

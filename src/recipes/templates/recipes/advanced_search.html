@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- advanced_search.html -->
+{% extends 'recipes/base.html' %}
+
+{% block title %}Advanced Recipe Search{% endblock %}
+
+{% block content %}
+<div class="search-container">
+    <h2>Advanced Recipe Search</h2>
+    
+    <form method="get" class="search-form">
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="search-button">Search</button>
+        <a href="{% url 'advanced-search' %}" class="reset-button">Reset</a>
+    </form>
+    
+    {% if results %}
+        <div class="results-summary">
+            <h3>Found {{ results|length }} recipe(s)</h3>
+        </div>
+        
+        <div class="results-table">
+            <h4>Search Results</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Recipe Name</th>
+                        <th>Cooking Time</th>
+                        <th>Difficulty</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in results %}
+                    <tr>
+                        <td><a href="{% url 'recipe-detail' recipe.id %}">{{ recipe.name }}</a></td>
+                        <td>{{ recipe.cooking_time }} min</td>
+                        <td>{{ recipe.calculate_difficulty }}</td>
+                        <td>{{ recipe.category.name|default:"-" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        {% if dataframe %}
+        <div class="pandas-table">
+            <h4>DataFrame View</h4>
+            {{ dataframe|safe }}
+        </div>
+        {% endif %}
+    
+    {% elif request.GET %}
+        <div class="no-results">
+            <p>No recipes found matching your criteria.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

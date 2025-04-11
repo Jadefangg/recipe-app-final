@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- DJANGO TEMPLATE TAGS BEING USED -->
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ category.name }} Recipes{% endblock %}
+
+{% block content %}
+    <h2>{{ category.name }} Recipes</h2>
+    
+    {% if category.description %}
+        <div class="category-description">
+            <p>{{ category.description }}</p>
+        </div>
+    {% endif %}
+    
+    <div class="recipes-list">
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <div class="recipe-card">
+                    <h3>{{ recipe.name }}</h3>
+                    <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+                    <p>Difficulty: {{ recipe.calculate_difficulty }}</p>
+                    <a href="{% url 'recipe-detail' recipe.id %}">View Recipe</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No recipes found in this category.</p>
+        {% endif %}
+    </div>
+    
+    <a href="{% url 'recipe-list' %}" class="back-link">Back to All Recipes</a>
+{% endblock %}

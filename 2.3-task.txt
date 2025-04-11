@@ -1,0 +1,111 @@
+Go to your project’s settings.py file to link your apps to the INSTALLED_APPS parameter.
+
+Screenshot the tree structure showing all the apps and the settings.py file in VSCode.
+
+Use the annotation tool in your image-editing software to point out the apps and the linkage.
+ 
+The following figure, for example, has annotations of two apps—books and customers—from the Bookstore application.
+Save this image as “project-structure.jpg” in “Exercise 2.3”.
+
+# Understanding Function-Based vs Class-Based Views in Django
+Some views are defined as functions while others are defined as classes:
+
+## Two Approaches to Django Views
+
+Django provides two main ways to create views:
+
+1. **Function-Based Views (FBVs)**: Simple Python functions that take a request and return a response
+2. **Class-Based Views (CBVs)**: Python classes that inherit from Django's View class (or its subclasses)
+
+## Why Use Function-Based Views?
+
+In your code, `home()` and `about()` are function-based views:
+
+```python
+def home(request):
+    # Logic here
+    return render(request, 'recipes/home.html', context)
+
+def about(request):
+    """The about page"""
+    return render(request, 'recipes/about.html')
+```
+
+### Advantages of FBVs:
+- **Simplicity**: Straightforward for simple pages
+- **Readability**: Easy to understand the complete view flow
+- **Control**: Direct control over request processing
+- **Flexibility**: Can structure code however you want
+
+## Why Use Class-Based Views?
+
+Your `RecipeListView` is a class-based view, specifically a `ListView`:
+
+```python
+class RecipeListView(ListView):
+    """The list-view for all the recipes"""
+    model = Recipe
+    template_name = "recipes/recipe_list.html"
+    context_object_name = 'recipes'
+    paginate_by = 8
+    
+    def get_queryset(self):
+        # Custom query logic
+```
+
+### Advantages of CBVs:
+- **Code Reuse**: Inherit common functionality from Django's generic views
+- **Separation of Concerns**: Different methods handle different HTTP methods
+- **Built-in Features**: Many features come pre-implemented (pagination, form handling)
+- **DRY Principle**: Don't Repeat Yourself - reuse common patterns
+
+## Why Use ListView Specifically
+
+`ListView` is a specialized class-based view designed specifically for displaying lists of objects. It automatically:
+
+1. Queries the database for all objects of a specified model
+2. Handles pagination
+3. Passes the objects to a template
+4. Supports filtering and ordering
+
+To implement equivalent functionality with a function-based view would require more code:
+
+```python
+def recipe_list(request):
+    # Get page number from request
+    page = request.GET.get('page', 1)
+    
+    # Get all recipes
+    all_recipes = Recipe.objects.all().order_by('-id')
+    
+    # Set up pagination
+    paginator = Paginator(all_recipes, 8)
+    try:
+        recipes = paginator.page(page)
+    except PageNotAnInteger:
+        recipes = paginator.page(1)
+    except EmptyPage:
+        recipes = paginator.page(paginator.num_pages)
+    
+    # Add search/filtering logic
+    # ...
+    
+    return render(request, 'recipes/recipe_list.html', {'recipes': recipes})
+```
+
+## Choosing Between FBVs and CBVs
+
+The choice depends on the complexity and requirements of each view:
+
+- **Simple pages** (like your "about" page): Function-based views are often simpler
+- **List/detail views** with standard patterns: Class-based views save code
+- **Complex custom logic**: Sometimes function-based views are clearer
+- **Reusing view patterns**: Class-based views excel at inheritance and mixins
+
+## Best Practice
+
+A common pattern in Django projects (which you're following) is to use:
+
+- **Function-based views** for simple pages (home, about, etc.)
+- **Class-based views** for common patterns (lists, details, forms)
+

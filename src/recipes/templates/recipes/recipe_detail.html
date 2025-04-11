@@ -1,0 +1,71 @@
+<!DOCTYPE html><!-- DJANGO TEMPLATE TAGS BEING USED -->
+
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+    <div class="recipe-detail">
+        <h2>{{ recipe.name }}</h2>
+        
+            
+        {% if recipe.image %}
+            <div class="recipe-image">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}">
+            </div>
+        {% endif %}
+        
+
+        
+        
+        <div class="recipe-meta">
+            <p>Cooking Time: <strong>{{ recipe.cooking_time }} minutes</strong></p>
+            <p>Difficulty: <strong class="difficulty-{{ difficulty|lower }}">{{ difficulty }}</strong></p>
+            {% if recipe.category %}
+                <p>Category: <a href="{% url 'category-detail' recipe.category.id %}">{{ recipe.category.name }}</a></p>
+            {% endif %}
+        </div>
+       
+
+        <div class="recipe-ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+                {% for ingredient in ingredients_list %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="recipe-related-ingredients">
+            <h3>Related Ingredients</h3>
+            {% if recipe.ingredient_list.all %}
+                <ul>
+                    {% for ingredient in recipe.ingredient_list.all %}
+                        <li>
+                            <a href="{% url 'ingredient-detail' ingredient.id %}">{{ ingredient.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No related ingredients.</p>
+            {% endif %}
+        </div>
+        
+        {% if related_recipes %}
+            <div class="related-recipes">
+                <h3>Related Recipes</h3>
+                <div class="recipes-list">
+                    {% for related in related_recipes %}
+                        <div class="recipe-card">
+                            <h4>{{ related.name }}</h4>
+                            <p>Cooking Time: {{ related.cooking_time }} minutes</p>
+                            <a href="{% url 'recipe-detail' related.id %}">View Recipe</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        
+        <a href="{% url 'recipe-list' %}" class="back-link">Back to All Recipes</a>
+    </div>
+{% endblock %}
