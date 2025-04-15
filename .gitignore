@@ -1,41 +1,6 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Text backup files and datbase
+*.sqlite3
+*.bak
 
-# Django
-*.log
-db.sqlite3
-media/
-
-# Virtual Environment
-venv/
-ENV/
-env/
-
-# IDE/Editor
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Environment variables
+# Ignore environment variables
 .env
