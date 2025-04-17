@@ -141,7 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# STATIC_URL = '/static/'
+# STATIC_URL = '/static/'e 
 # STATICFILES_DIRS=[
 #    BASE_DIR / 'static'
 # ]
@@ -165,3 +165,6 @@ LOGIN_URL = '/login/'  # Where to redirect users for login!!
 # Use PostgreSQL in production environments
 if 'DATABASE_URL' in os.environ:
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
+# DATABASE_URL:      postgres://u22noqnmbgpgk6:pd8f6c072170c00c8cdb34227202865c07767e24134cc9e1e00022b8e4f06bfee@c97r84s7psuajm.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d3od6vk3q4sdar
+# DJANGO_SECRET_KEY: a-very-long-key-comprised-of-atleast-50-random-characters-including-CAPS-NUMBERS0123456789-and-€ccharacters    
